@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/AboutusPage.css';
 import Robot from '../../assets/robot3.png';
+import Heroimg2 from '../../assets/aboutus2.png'
+
+ 
 import aiimgforcard from '../../assets/Artificial_Intelligence_img.png';
 import system_integration from '../../assets/system_integration.png';
 import TeamImage from '../../assets/teamimg.png';
@@ -223,7 +226,7 @@ const AboutPage = () => {
           </div>
         </div>
         <div className="aboutpage-mission-image">
-          <img src={Robot} alt="Our mission visualization" />
+          <img src={Heroimg2} alt="Our mission visualization" />
         </div>
       </section>
 
