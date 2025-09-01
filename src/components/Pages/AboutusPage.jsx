@@ -10,8 +10,8 @@ import FooterSection from '../Sections/FooterSection.jsx';
 import RPAForm from '../RPAForm.jsx';
 
 // Placeholder images for courses
-import BeginnerCourseImg from '../../assets/UiPath-Logo.png';
-import IntermediateCourseImg from '../../assets/UiPath-Logo.png';
+import BeginnerCourseImg from '../../assets/begnner-card.jpeg';
+import IntermediateCourseImg from '../../assets/intermidite-coursecard.png';
 import AdvancedCourseImg from '../../assets/UiPath-Logo.png';
 
 const AboutPage = () => {
@@ -196,6 +196,9 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
+
+
+       
 
       {/* Mission Section */}
       <section className="aboutpage-mission-section" ref={el => sectionRefs.current[2] = el}>
