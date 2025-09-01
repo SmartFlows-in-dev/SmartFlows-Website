@@ -4,22 +4,19 @@ import '../styles/AboutusPage.css';
 import Robot from '../../assets/robot3.png';
 import aiimgforcard from '../../assets/Artificial_Intelligence_img.png';
 import system_integration from '../../assets/system_integration.png';
-
 import TeamImage from '../../assets/teamimg.png';
 import FooterSection from '../Sections/FooterSection.jsx';
 import RPAForm from '../RPAForm.jsx';
-
-// Placeholder images for courses
 import BeginnerCourseImg from '../../assets/begnner-card.jpeg';
-import IntermediateCourseImg from '../../assets/intermidite-coursecard.png';
-import AdvancedCourseImg from '../../assets/UiPath-Logo.png';
+import IntermediateCourseImg from '../../assets/intermidite-coursecard.jpeg';
+import AdvancedCourseImg from '../../assets/advanced-course-card.jpeg';
 
 const AboutPage = () => {
   const [projectsCompleted, setProjectsCompleted] = useState(0);
   const [satisfactionRate, setSatisfactionRate] = useState(0);
   const [automationHours, setAutomationHours] = useState(0);
   const [showForm, setShowForm] = useState(false);
-  
+
   const sectionRefs = useRef([]);
 
   const handleBookAppointment = () => {
@@ -31,7 +28,6 @@ const AboutPage = () => {
   };
 
   useEffect(() => {
-    // Animation for stats counting
     const animateStats = () => {
       animateValue(0, 150, 2000, setProjectsCompleted, () => {
         setProjectsCompleted(prev => prev + '+');
@@ -59,7 +55,6 @@ const AboutPage = () => {
       window.requestAnimationFrame(step);
     };
 
-    // Intersection Observer for scroll animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -161,7 +156,6 @@ const AboutPage = () => {
 
   return (
     <div className="aboutpage-page">
-      {/* Hero Section */}
       <section className="aboutpage-hero" ref={el => sectionRefs.current[0] = el}>
         <div className="aboutpage-hero-content">
           <h1>Transforming Businesses Through Intelligent Automation</h1>
@@ -177,9 +171,8 @@ const AboutPage = () => {
           <img src={Robot} alt="Automation technology" />
           <div className="aboutpage-glow-effect"></div>
         </div>
-      </section>  
+      </section>
 
-      {/* Stats Section */}
       <section className="aboutpage-stats-section" ref={el => sectionRefs.current[1] = el}>
         <div className="aboutpage-stats-container">
           <div className="aboutpage-stat-item">
@@ -197,17 +190,13 @@ const AboutPage = () => {
         </div>
       </section>
 
-
-       
-
-      {/* Mission Section */}
       <section className="aboutpage-mission-section" ref={el => sectionRefs.current[2] = el}>
         <div className="aboutpage-mission-content">
           <div className="aboutpage-section-tag">OUR MISSION</div>
           <h2>Empowering Digital Transformation</h2>
           <p className="aboutpage-mission-statement">
-            We believe automation should be accessible, understandable, and valuable for every organization. 
-            Our mission is to bridge the gap between technological potential and practical implementation, 
+            We believe automation should be accessible, understandable, and valuable for every organization.
+            Our mission is to bridge the gap between technological potential and practical implementation,
             delivering solutions that create measurable impact.
           </p>
           <div className="aboutpage-values-grid">
@@ -238,12 +227,11 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Team Section */}
       <section className="aboutpage-team-section" ref={el => sectionRefs.current[3] = el}>
         <div className="aboutpage-team-image">
-          <img 
-            src={TeamImage} 
-            alt="Our expert team" 
+          <img
+            src={TeamImage}
+            alt="Our expert team"
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = 'https://via.placeholder.com/600x400?text=Team+Image';
@@ -254,8 +242,8 @@ const AboutPage = () => {
           <div className="aboutpage-section-tag">OUR TEAM</div>
           <h2>Automation Experts Driving Your Success</h2>
           <p>
-            Our team combines deep technical expertise with business acumen to deliver automation solutions 
-            that solve real business problems. With certifications across all major RPA platforms and 
+            Our team combines deep technical expertise with business acumen to deliver automation solutions
+            that solve real business problems. With certifications across all major RPA platforms and
             experience across industries, we bring the right skills to every engagement.
           </p>
           <div className="aboutpage-team-stats">
@@ -271,7 +259,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Capabilities Section */}
       <section className="aboutpage-capabilities-section" ref={el => sectionRefs.current[4] = el}>
         <div className="aboutpage-section-header">
           <div className="aboutpage-section-tag">OUR CAPABILITIES</div>
@@ -286,8 +273,8 @@ const AboutPage = () => {
                   {capability.icon}
                 </div>
               ) : (
-                <img 
-                  src={capability.image} 
+                <img
+                  src={capability.image}
                   alt={capability.alt}
                   className="aboutpage-capability-icon-img"
                   onError={(e) => {
@@ -303,7 +290,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Courses Section */}
       <section className="aboutpage-courses-section" ref={el => sectionRefs.current[5] = el}>
         <div className="aboutpage-section-header">
           <div className="aboutpage-section-tag">LEARNING</div>
@@ -313,10 +299,16 @@ const AboutPage = () => {
         <div className="aboutpage-courses-grid">
           {courses.map((course) => (
             <div className="aboutpage-course-card" key={course.id}>
-              <Link to={`/courses`} className="aboutpage-course-link">
+              <Link
+                to={{
+                  pathname: "/courses",
+                  search: `?level=${course.level}`,
+                }}
+                className="aboutpage-course-link"
+              >
                 <div className="aboutpage-course-image-container">
-                  <img 
-                    src={course.imageUrl} 
+                  <img
+                    src={course.imageUrl}
                     alt={course.title}
                     className="aboutpage-course-image"
                     onError={(e) => {
@@ -355,24 +347,20 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="aboutpage-cta" ref={el => sectionRefs.current[6] = el}>
         <div className="aboutpage-cta-content">
           <h2>Ready to Transform Your Business with Automation?</h2>
           <p>Whether you need enterprise automation solutions or want to build expertise within your team, we have the perfect offering for you.</p>
           <div className="aboutpage-cta-buttons">
-            <Link to="/#contact" className="aboutpage-btn-primary">Get Started</Link>
-            <button className="aboutpage-btn-outline  btn-at-bottom " onClick={handleBookAppointment}>
+            <Link to="/courses" className="aboutpage-btn-primary">Get Started</Link>
+            <button className="aboutpage-btn-outline btn-at-bottom" onClick={handleBookAppointment}>
               Request Demo
             </button>
           </div>
         </div>
       </section>
 
-      {/* Footer Section */}
       <FooterSection />
-
-      {/* RPA Form Modal */}
       <RPAForm isOpen={showForm} onClose={closeForm} />
     </div>
   );

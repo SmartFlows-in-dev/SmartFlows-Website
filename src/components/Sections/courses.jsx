@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../styles/courses.css';
 import '../styles/Global.css';
 import UipathLogo from '../../assets/UiPath-Logo.png';
@@ -28,7 +29,19 @@ const CoursePage = () => {
     terms: false
   });
 
- const courses = [
+  const location = useLocation();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const level = queryParams.get('level');
+    if (level && levels.includes(level)) {
+      setActiveFilter(level);
+    } else {
+      setActiveFilter('All');
+    }
+  }, [location.search]);
+
+  const courses = [
     {
       id: 1,
       name: 'UiPath Automation',
@@ -964,8 +977,6 @@ const CoursePage = () => {
       ]
     }
   ];
-
-
 
   const levels = ['All', 'Beginner', 'Intermediate', 'Advanced'];
 
