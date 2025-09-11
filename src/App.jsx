@@ -9,6 +9,8 @@ import ScrollToTop from './components/ScrollToTop'; // Add this import
 import BlogPage from './components/Pages/Blogs.jsx';
 import CareerPage from './components/Pages/CareerPage.jsx';
 import AboutusPage from './components/Pages/AboutusPage.jsx';
+import OurProjects from './components/Pages/OurProject.jsx';
+
 
 // Import all sections directly
 import ServicesPage from './components/Pages/servicepage.jsx';
@@ -52,6 +54,9 @@ function App() {
             <Route path="/careerpage" element={<CareerPage />} />
             <Route path="/aboutuspage" element={<AboutusPage />} />
             <Route path="/services" element={<ServicesPage />} />
+             <Route path="/ourprojects" element={<OurProjects />} />
+
+
             <Route path="*" element={
               <div style={{ padding: '2rem', textAlign: 'center' }}>
                 <h1>404 - Page Not Found</h1>

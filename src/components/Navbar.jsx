@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import '../components/styles/Navbar.css';
 import RPAForm from './RPAForm';
 import Mainlogo from '../assets/Logomain3.png';
+
+// Simple debounce function
+const debounce = (func, wait) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(null, args), wait);
+  };
+};
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +19,7 @@ function Navbar() {
   const [showForm, setShowForm] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => {
@@ -27,11 +37,7 @@ function Navbar() {
   };
 
   const toggleDropdown = (dropdownName) => {
-    if (openDropdown === dropdownName) {
-      setOpenDropdown(null);
-    } else {
-      setOpenDropdown(dropdownName);
-    }
+    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
 
   // Scroll to section if hash exists in URL
@@ -49,21 +55,22 @@ function Navbar() {
     closeMenu();
 
     if (location.pathname === '/') {
-      // If we're already on home page, just scroll
+      // If on home page, scroll to section
       const element = document.querySelector(hash);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // If we're on another page, navigate to home first
-      window.location.href = `/${hash}`;
+      // Navigate to home page with hash
+      navigate(`/${hash}`);
     }
   };
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = debounce(() => {
       setScrolled(window.scrollY > 10);
-    };
+    }, 100);
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -88,8 +95,10 @@ function Navbar() {
               <button
                 className={`nav-link dropdown-toggle ${openDropdown === 'about' ? 'active' : ''}`}
                 onClick={() => toggleDropdown('about')}
+                aria-expanded={openDropdown === 'about'}
+                aria-haspopup="true"
               >
-                <span>About</span>
+                About
                 <svg
                   className={`dropdown-icon ${openDropdown === 'about' ? 'open' : ''}`}
                   viewBox="0 0 24 24"
@@ -98,11 +107,7 @@ function Navbar() {
                 </svg>
               </button>
               <div className={`dropdown-menu ${openDropdown === 'about' ? 'show' : ''}`}>
-                <NavLink
-                  to="/aboutuspage  "
-                  onClick={closeMenu}
-                  className="dropdown-item"
-                >
+                <NavLink to="/aboutuspage" onClick={closeMenu} className="dropdown-item">
                   About Us
                 </NavLink>
                 <a
@@ -112,25 +117,41 @@ function Navbar() {
                 >
                   Testimonials
                 </a>
-                <NavLink
-                  to="/careerpage"
-                  onClick={closeMenu}
-                  className="dropdown-item"
-                >
+                <NavLink to="/careerpage" onClick={closeMenu} className="dropdown-item">
                   Careers
                 </NavLink>
-
               </div>
             </div>
 
-            {/* Services Link */}
-            <NavLink
-              to="/services"
-              onClick={closeMenu}
-              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            {/* Services Dropdown */}
+            <div
+              className="dropdown-container"
+              onMouseEnter={() => !isOpen && setOpenDropdown('services')}
+              onMouseLeave={() => !isOpen && setOpenDropdown(null)}
             >
-              <span>Services</span>
-            </NavLink>
+              <button
+                className={`nav-link dropdown-toggle ${openDropdown === 'services' ? 'active' : ''}`}
+                onClick={() => toggleDropdown('services')}
+                aria-expanded={openDropdown === 'services'}
+                aria-haspopup="true"
+              >
+                Services
+                <svg
+                  className={`dropdown-icon ${openDropdown === 'services' ? 'open' : ''}`}
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7 10l5 5 5-5z" />
+                </svg>
+              </button>
+              <div className={`dropdown-menu ${openDropdown === 'services' ? 'show' : ''}`}>
+                <NavLink to="/services" onClick={closeMenu} className="dropdown-item">
+                  Services
+                </NavLink>
+                <NavLink to="/ourprojects" onClick={closeMenu} className="dropdown-item">
+                  Our Projects
+                </NavLink>
+              </div>
+            </div>
 
             {/* Resources Dropdown */}
             <div
@@ -141,8 +162,10 @@ function Navbar() {
               <button
                 className={`nav-link dropdown-toggle ${openDropdown === 'resources' ? 'active' : ''}`}
                 onClick={() => toggleDropdown('resources')}
+                aria-expanded={openDropdown === 'resources'}
+                aria-haspopup="true"
               >
-                <span>Resources</span>
+                Resources
                 <svg
                   className={`dropdown-icon ${openDropdown === 'resources' ? 'open' : ''}`}
                   viewBox="0 0 24 24"
@@ -151,18 +174,10 @@ function Navbar() {
                 </svg>
               </button>
               <div className={`dropdown-menu ${openDropdown === 'resources' ? 'show' : ''}`}>
-                <NavLink
-                  to="/courses"
-                  onClick={closeMenu}
-                  className="dropdown-item"
-                >
+                <NavLink to="/courses" onClick={closeMenu} className="dropdown-item">
                   Courses
                 </NavLink>
-                <NavLink
-                  to="/blogpage"
-                  onClick={closeMenu}
-                  className="dropdown-item"
-                >
+                <NavLink to="/blogpage" onClick={closeMenu} className="dropdown-item">
                   Blogs
                 </NavLink>
               </div>
@@ -174,14 +189,14 @@ function Navbar() {
               onClick={(e) => handleInPageNavigation('#contact', e)}
               className="nav-link mobile-contact-link"
             >
-              <span>Contact</span>
+              Contact
             </a>
 
-            {/* This will be hidden on mobile */}
+            {/* Desktop button container */}
             <div className="contact-and-button">
               <div className="button-container">
                 <button className="navbar-btn" onClick={handleBookAppointment}>
-                  <span>Book a Demo</span>
+                  Book a Demo
                 </button>
               </div>
             </div>
@@ -191,13 +206,14 @@ function Navbar() {
           <div className="ham-and-demo-formobile">
             <div className="mobile-button-container">
               <button className="navbar-btn" onClick={handleBookAppointment}>
-                <span>Book Demo</span>
+                Book Demo
               </button>
             </div>
             <button
               className={`hamburger ${isOpen ? 'active' : ''}`}
               onClick={toggleMenu}
               aria-label="Menu"
+              aria-expanded={isOpen}
             >
               <span className="hamburger-line"></span>
               <span className="hamburger-line"></span>

@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import '../styles/AboutusPage.css';
 import Robot from '../../assets/robot3.png';
 import Heroimg2 from '../../assets/aboutus2.png'
+import Box1 from '../../assets/aboutus-box1.png'
+import Box2 from '../../assets/Box2.png'
 
- 
+
 import aiimgforcard from '../../assets/Artificial_Intelligence_img.png';
 import system_integration from '../../assets/system_integration.png';
 import TeamImage from '../../assets/teamimg.png';
@@ -133,8 +135,8 @@ const AboutPage = () => {
   const capabilities = [
     {
       title: "Robotic Process Automation",
-      description: "UiPath, Automation Anywhere, Blue Prism, Power Automate with enterprise-grade implementations",
-      icon: "🤖",
+      description: "UiPath, Automation Anywhere, Blue Prism, Power Automate with e35555+999999999999999666666nterprise-grade implementations",
+      image: Box1,
       ariaLabel: "Robotic Process Automation"
     },
     {
@@ -152,7 +154,7 @@ const AboutPage = () => {
     {
       title: "Process Optimization",
       description: "Process mining, workflow analysis, performance benchmarking and continuous improvement",
-      icon: "📊",
+       image: Box2,
       ariaLabel: "Process Optimization"
     }
   ];
@@ -171,7 +173,7 @@ const AboutPage = () => {
           </div>
         </div>
         <div className="aboutpage-hero-image">
-          <img src={Robot} alt="Automation technology" />
+          <img src={Box2} alt="Automation technology" />
           <div className="aboutpage-glow-effect"></div>
         </div>
       </section>

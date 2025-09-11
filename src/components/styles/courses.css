@@ -637,6 +637,7 @@ body {
 }
 
 .course-image-large img {
+  transform: scale(0.7);
   margin: auto;
   width: 75%;
   height: auto;
