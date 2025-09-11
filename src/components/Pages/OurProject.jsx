@@ -8,6 +8,8 @@ import '../styles/OurProject.css';
 import FooterSection from '../Sections/FooterSection.jsx';
 import RPAForm from '../RPAForm';
 import InvoiceScannerImage from '../../assets/inoice-scaanner.png';
+import ComingSoon from '../../assets/comingsoon.webp';
+
 
 const OurProject = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -36,7 +38,7 @@ const OurProject = () => {
     {
       id: 2,
       title: "Coming Soon",
-      image: "https://via.placeholder.com/600x400/00bcd4/ffffff?text=New+Project",
+      image: ComingSoon,
       description: "We're constantly developing new automation solutions",
       features: [
         "Stay tuned for updates",
@@ -52,7 +54,7 @@ const OurProject = () => {
     {
       id: 3,
       title: "Coming Soon",
-      image: "https://via.placeholder.com/600x400/00bcd4/ffffff?text=New+Project",
+      image:ComingSoon,
       description: "We're constantly developing new automation solutions",
       features: [
         "Stay tuned for updates",
