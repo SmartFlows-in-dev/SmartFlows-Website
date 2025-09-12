@@ -31,7 +31,7 @@ const OurProject = () => {
       ],
       color: "#00bcd4",
       detailedDescription: "Our Advanced Invoice Analysis tool revolutionizes how businesses process financial documents. Using cutting-edge AI technology, we extract key data points from invoices with exceptional accuracy, eliminating manual data entry and reducing errors. The system standardizes information across various invoice formats and provides clean, structured data for integration with your accounting systems.",
-      liveUrl: "https://invoice-scanner-xi.vercel.app/",
+      liveUrl: "https://smartflows-invoice-scanner.vercel.app/",
       githubUrl: "#",
       technologies: ["React", "Node.js", "AI/ML", "Computer Vision", "PDF Processing"]
     },
