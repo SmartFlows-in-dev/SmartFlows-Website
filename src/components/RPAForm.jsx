@@ -40,7 +40,7 @@ function RPAForm({ isOpen, onClose }) {
     setSubmitError(null);
 
     try {
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbwwU2Fgtr777FfvUSLdgj6efE20xOo4jm9yLrjbpGiA0rfvP49AvRh7x1B9zoFuFW-O/exec';
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbwsI34hEnFct7G3PilzRxYKQ7jRWaEAke785gqGg-uvyJDVjDAxFWLs2rr2YJFnflHr/exec';
       
       // Convert form data to URL-encoded format
       const formDataEncoded = new URLSearchParams();
