@@ -1039,7 +1039,7 @@ const CoursePage = () => {
     setIsSubmitting(true);
 
     try {
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbwKZaM2wlEshmO_yqxGiQdzt6veybp1P4eXXKi2lV2Xte94ANFrv9gC6TUjM1IufA4/exec';
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbyyUct2BqOaeBZWqwK-5ma7kNwB34d88m2HYEBV20RcW0BSHxDJyMQobhiv4GelAPv6/exec';
 
       const formDataEncoded = new URLSearchParams();
       formDataEncoded.append('firstName', formData.firstName);
