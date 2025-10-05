@@ -150,6 +150,14 @@ function Navbar() {
                 <NavLink to="/ourprojects" onClick={closeMenu} className="dropdown-item">
                   Our Projects
                 </NavLink>
+                <a
+                  href="https://schools.smartflows.in/"          
+                  onClick={closeMenu}
+                  className="dropdown-item"
+                >
+                  Schools Portal
+                </a>
+
               </div>
             </div>
 
