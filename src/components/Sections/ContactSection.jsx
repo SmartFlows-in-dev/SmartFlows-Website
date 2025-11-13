@@ -65,7 +65,7 @@ const ContactSection = () => {
 
     try {
       const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbx7yRRNXsG51oZhubR2zID8wqRq9xUW5g5aIKsg0hyiSTwdHV2k9kU98WxfVJxN36XS/exec',
+        '/api',  // Proxied by Vite to GAS URL (fixes CORS)
         {
           method: 'POST',
           headers: {
