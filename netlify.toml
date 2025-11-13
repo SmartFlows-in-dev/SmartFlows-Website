@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"  # Or your build command
+  functions = "netlify/functions"
+  publish = "dist"  # Vite's default output
+
+[[redirects]]
+  from = "/api"
+  to = "/.netlify/functions/api"
+  status = 200
+  methods = ["POST", "OPTIONS"]
+  force = true

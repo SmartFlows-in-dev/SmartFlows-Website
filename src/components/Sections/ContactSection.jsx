@@ -65,7 +65,7 @@ const ContactSection = () => {
 
     try {
       const response = await fetch(
-        '/api',  // Proxied by Vite to GAS URL (fixes CORS)
+        '/api',  // Proxied by Netlify function to GAS
         {
           method: 'POST',
           headers: {
