@@ -1446,9 +1446,9 @@ const handleEnrollmentSubmit = async (e) => {
                   </div>
                   <div className="banner-right">
                     <div className="price-tag">
-                      <span className="original-price"> Rs. 299</span>
-                      <span className="discounted-price">Rs. 249</span>
-                      <span className="discount-badge">Save Rs. 50</span>
+                      <span className="original-price"> Rs. 17999</span>
+                      <span className="discounted-price">Rs. 8999</span>
+                      <span className="discount-badge">Save 50%</span>
                     </div>
                   </div>
                 </div>
