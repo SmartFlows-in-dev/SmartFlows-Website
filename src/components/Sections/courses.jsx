@@ -1028,73 +1028,97 @@ const CoursePage = () => {
     }));
   };
 
-  const handleEnrollmentSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!formData.terms) {
-      alert('You must agree to the terms and conditions');
-      return;
-    }
 
-    setIsSubmitting(true);
 
+
+
+
+
+
+
+
+
+
+const handleEnrollmentSubmit = async (e) => {
+  e.preventDefault();
+  
+  if (!formData.terms) {
+    alert('You must agree to the terms and conditions');
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbyyUct2BqOaeBZWqwK-5ma7kNwB34d88m2HYEBV20RcW0BSHxDJyMQobhiv4GelAPv6/exec';
+
+    const formDataEncoded = new URLSearchParams();
+    formDataEncoded.append('firstName', formData.firstName);
+    formDataEncoded.append('lastName', formData.lastName);
+    formDataEncoded.append('email', formData.email);
+    formDataEncoded.append('phone', formData.phone);
+    formDataEncoded.append('experience', formData.experience);
+    formDataEncoded.append('goals', formData.goals);
+    formDataEncoded.append('courseName', selectedCourse.name);
+    formDataEncoded.append('courseLevel', selectedCourse.level);
+    formDataEncoded.append('inquiryType', 'course'); // ADD THIS LINE
+    formDataEncoded.append('status', 'new');
+
+    let response;
     try {
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbyyUct2BqOaeBZWqwK-5ma7kNwB34d88m2HYEBV20RcW0BSHxDJyMQobhiv4GelAPv6/exec';
-
-      const formDataEncoded = new URLSearchParams();
-      formDataEncoded.append('firstName', formData.firstName);
-      formDataEncoded.append('lastName', formData.lastName);
-      formDataEncoded.append('email', formData.email);
-      formDataEncoded.append('phone', formData.phone);
-      formDataEncoded.append('experience', formData.experience);
-      formDataEncoded.append('goals', formData.goals);
-      formDataEncoded.append('courseName', selectedCourse.name);
-      formDataEncoded.append('courseLevel', selectedCourse.level);
-      formDataEncoded.append('status', 'new');
-
-      let response;
-      try {
-        response = await fetch(scriptUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: formDataEncoded,
-          mode: 'no-cors'
-        });
-      } catch (error) {
-        console.log('Direct request failed, trying with proxy...');
-        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-        response = await fetch(proxyUrl + scriptUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-Requested-With': 'XMLHttpRequest'
-          },
-          body: formDataEncoded
-        });
-      }
-
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        experience: '',
-        goals: '',
-        terms: false
+      response = await fetch(scriptUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formDataEncoded,
+        mode: 'no-cors'
       });
-      
-      setShowEnrollmentModal(false);
-      alert(`Enrollment submitted successfully for ${selectedCourse.name}!\nWe'll contact you shortly at ${formData.email}`);
-
     } catch (error) {
-      console.error("Error submitting form: ", error);
-      alert('Failed to submit form. Please try again or contact us directly.');
-    } finally {
-      setIsSubmitting(false);
+      console.log('Direct request failed, trying with proxy...');
+      const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+      response = await fetch(proxyUrl + scriptUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: formDataEncoded
+      });
     }
-  };
+
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      experience: '',
+      goals: '',
+      terms: false
+    });
+    
+    setShowEnrollmentModal(false);
+    alert(`Enrollment submitted successfully for ${selectedCourse.name}!\nWe'll contact you shortly at ${formData.email}`);
+
+  } catch (error) {
+    console.error("Error submitting form: ", error);
+    alert('Failed to submit form. Please try again or contact us directly.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <div className="course-page">
